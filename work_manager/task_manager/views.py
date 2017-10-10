@@ -8,8 +8,13 @@ def hello_page(request):
     word = "Hello World!"
     years_old = 19
     capital = ['paris', 'new york', 'london']
-    return render (request, 'index.html', {'word': word, 'years': years_old, 'cap': capital})
+    return render (request, 'task_manager/index.html', {'word': word, 'years': years_old, 'cap': capital})
 
 #View for personal calling
 def hello_serrones(request):
     return HttpResponse ("Rumo a dominação!!!")
+
+# View for connection page
+def connection_page(request):
+    word = "Yep!! It's Done!!"
+    return render(request, 'task_manager/connection.html', {'word': word})
