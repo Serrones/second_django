@@ -6,9 +6,7 @@ from django.http import HttpResponse
 #View for index page
 def hello_page(request):
     word = "Hello World!"
-    years_old = 19
-    capital = ['paris', 'new york', 'london']
-    return render (request, 'task_manager/index.html', {'word': word, 'years': years_old, 'cap': capital})
+    return render (request, 'task_manager/index.html', {'word': word})
 
 #View for personal calling
 def hello_serrones(request):

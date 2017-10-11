@@ -4,8 +4,14 @@
             Hello World Title
 {% endblock %}
 {% block h1 %}
-            {{bloc.super}}Hello World Django
+            {{bloc.super}}Second_DJango
 {% endblock %}
     {% block article_content %}
-    Hello world !
+    <span> {{word | upper}} </span>
+    {% url 'connection' as the_connection %}
+    </br>
+    </br>
+    <a href= "{{ the_connection }}">Go to the Deep Hole</a>
+    {% load static %}
+    <script src="{% static "js/index.js" %}"></script>
 {% endblock %}

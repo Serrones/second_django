@@ -1,19 +1,14 @@
 
-{% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>
+{% extends 'base.html' %}
+
+{% block title_html %}
             Connection
-        </title>
-    </head>
-    <body>
-        <h1>
-            Connection Done
-        </h1>
-        </br>
-        <article>
-            <span> {{word | upper}} </span>
-        </article>
-    </body>
-</html>
+{% endblock %}
+{% block h1 %}
+            {{bloc.uper}} Connection Done
+{% endblock %}
+    {% block article_content %}
+    <span> {{word | upper}} </span>
+    </br>
+    </br>
+    {% endblock %}
