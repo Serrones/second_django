@@ -26,28 +26,32 @@ class Supervisor(User_Profile):
     # Fields...
     def __str__ (self):
         return self.name
-    # Duplicated common fields
+        # Duplicated common fields
     specialisation = models.CharField(max_length=50, verbose_name="Specialisation")
 
 class Developer(User_Profile):
     # Fields...
     def __str__ (self):
         return self.name
-    # Duplicated common fields
+        # Duplicated common fields
+
     gerente = models.ForeignKey(Supervisor, verbose_name="Supervisor")
 
 class Project(models.Model):
     # Fields...
-    def __str__ (self):
-        return self.name
     title = models.CharField(max_length=50, verbose_name="Title")
     description = models.CharField(max_length=1000, verbose_name="Description")
     client_name = models.CharField(max_length=100, verbose_name="Client name")
 
+    def __str__ (self):
+        return self.title
+
+
 class Task(models.Model):
     # Fields...
     def __str__ (self):
-        return self.name
+        return self.title
+
     title = models.CharField(max_length=50, verbose_name="Title")
     description = models.CharField(max_length=1000, verbose_name="Description")
     time_elapsed = models.IntegerField(verbose_name="Elapsed time" ,
