@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title_html %}
+            Projects List
+{% endblock %}
+{% block h1 %}
+            Projects List
+{% endblock %}
+{% block article_content %}
+    <h3>{{ action }}</h3>
+    {% if all_projects|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Title</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in all_projects %}
+                    <tr>
+                        <td>{{ project.id }}</td>
+                        <td>{{ project.title }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <span>No project.</span>
+    {% endif %}
+{% endblock %}
