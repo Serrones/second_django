@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title_html %}
+            Saving models
+{% endblock %}
+{% block h1 %}
+            Welcome to the Automatic Saving
+{% endblock %}
+{% block article_content %}
+    <h2>{{ action }}</h2>
+    </br>
+    </br>
+    {% url 'home' as home %}
+    <a href= "{{ home }}">Go Home</a>
+{% endblock %}

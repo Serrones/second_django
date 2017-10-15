@@ -7,13 +7,25 @@
             Welcome to the Task Manager
 {% endblock %}
 {% block article_content %}
-    <h3>{{ action }}</h3>
+    <h2>{{ action }}</h2>
     {% url 'projects' as the_projects %}
     <a href= "{{ the_projects }}">Go to the Projects</a>
     </br>
     </br>
     {% url 'connection' as the_connection %}
     <a href= "{{ the_connection }}">Go to the Deep Hole</a>
+    </br>
+    </br>
+    {% url 'automatic' as automatic %}
+    <a href= "{{ automatic }}">Create a automatic project</a>
+    </br>
+    </br>
+    {% url 'mdeveloper' as mdeveloper %}
+    <a href= "{{ mdeveloper }}">Create Developer - HTML form</a>
+    </br>
+    </br>
+    {% url 'ddeveloper' as ddeveloper %}
+    <a href= "{{ ddeveloper }}">Create Developer - Django form</a>
     {% load static %}
     <script src="{% static "js/index.js" %}"></script>
 {% endblock %}
