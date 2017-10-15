@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Project, Task, Dev_Work_Task, Developer, Supervisor, User_Profile
 from django.utils import timezone
 from django import forms
+from django.core.urlresolvers import reverse
 
 # Create your views here.
 
@@ -69,15 +70,29 @@ def mdeveloper_page(request):
         supervisors_list = Supervisor.objects.all()
         return render(request, 'task_manager/mdeveloper.html', {'supervisors_list':supervisors_list})
 
+error_name = {
+                'required': 'You must type a name !',
+                'invalid': 'Wrong format.'
+                }
 
 class Form_inscription(forms.Form):
     """ This line creates the form with four fields. It is an object that
     inherits from forms.Form. It contains attributes that define the form
     fields."""
-    name = forms.CharField(label="Name", max_length=30)
+    name = forms.CharField(label="Name", max_length=30, error_messages=error_name, initial="New")
     login = forms.CharField(label="Login", max_length=30)
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
-    supervisor = forms.ModelChoiceField(label="Supervisor", queryset=Supervisor.objects.all())
+    password_bis = forms.CharField(label = "Password", widget = forms.PasswordInput)
+    supervisor = forms.ModelChoiceField(label="Supervisor", queryset=Supervisor.objects.all(),
+                                        initial=Supervisor.objects.all()[:1].get().id)
+
+    def clean(self):
+        cleaned_data = super(Form_inscription, self).clean()
+        password = self.cleaned_data.get('password')
+        password_bis = self.cleaned_data.get('password_bis')
+        if password and password_bis and password != password_bis:
+            raise forms.ValidationError("Passwords are not identical.")
+        return self.cleaned_data
 
 # View for create_developer with Django form
 def ddeveloper_page(request):
@@ -101,7 +116,7 @@ def ddeveloper_page(request):
             new_developer = Developer(name=name, login=login,
                 password=password, email="", gerente=supervisor)
             new_developer.save()
-            return HttpResponse("Developer added")
+            return HttpResponseRedirect(reverse('home'))
         else:
             return render(request, 'task_manager/ddeveloper.html',{'form' : form})
             """ To send forms to the template, just send it like any other
@@ -112,3 +127,49 @@ def ddeveloper_page(request):
         """ In this case, the user does not yet display the form, it
         instantiates with no data inside."""
         return render(request, 'task_manager/ddeveloper.html', {'form': form})
+
+def csupervisor_page(request):
+    if len(request.POST) > 0:
+        form = Form_supervisor(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            # If the form is valid, we store the data in a model record in the form.
+            return HttpResponseRedirect(reverse('home'))
+            # This line is used to redirect to the specified URL. We use the reverse() function to get the URL from its name defines urls.py.
+        else:
+            return render(request, 'task_manager/csupervisor.html', {'form': form})
+    else:
+        form = Form_supervisor()
+        return render(request, 'task_manager/csupervisor.html', {'form': form})
+
+class Form_supervisor(forms.ModelForm):
+    # Here we create a class that inherits from ModelForm.
+    class Meta:
+        """ We extend the Meta class of the ModelForm. It is this class that
+        will allow us to define the properties of ModelForm."""
+        model = Supervisor # We define the model that should be based on the form.
+        exclude = ('date_created', 'last_connection', 'born_date', 'phone')
+        """ We exclude certain fields of this form. It would also have been
+        possible to do the opposite. That is to say with the fields property,
+        we have defined the desired fields in the form."""
+
+class Form_project_create(forms.Form):
+    title = forms.CharField(label="Title", max_length=30)
+    description = forms.CharField(widget= forms.Textarea(attrs={'rows':5, 'cols': 100,}))
+    client_name = forms.CharField(label="Client", max_length=50)
+
+def cproject_page(request):
+    if request.POST:
+        form = Form_project_create(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            client_name = form.cleaned_data['client_name']
+            new_project = Project(title=title, description=description, client_name=client_name)
+            new_project.save()
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            return render(request, 'task_manager/create_project.html', {'form': form})
+    else:
+        form = Form_project_create()
+        return render(request, 'task_manager/create_project.html', {'form' : form})

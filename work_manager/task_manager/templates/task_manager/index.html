@@ -12,6 +12,10 @@
     <a href= "{{ the_projects }}">Go to the Projects</a>
     </br>
     </br>
+    {% url 'cproject' as cproject %}
+    <a href= "{{ cproject }}">Create Project - Django Modelform</a>
+    </br>
+    </br>
     {% url 'connection' as the_connection %}
     <a href= "{{ the_connection }}">Go to the Deep Hole</a>
     </br>
@@ -26,6 +30,10 @@
     </br>
     {% url 'ddeveloper' as ddeveloper %}
     <a href= "{{ ddeveloper }}">Create Developer - Django form</a>
+    </br>
+    </br>
+    {% url 'csupervisor' as csupervisor %}
+    <a href= "{{ csupervisor }}">Create Supervisor - Django Modelform</a>
     {% load static %}
     <script src="{% static "js/index.js" %}"></script>
 {% endblock %}

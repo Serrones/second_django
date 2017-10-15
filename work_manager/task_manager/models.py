@@ -2,12 +2,17 @@ from django.db import models
 
 # Create your models here.
 
+error_name = {
+                'required': 'You must type a name !',
+                'invalid': 'Wrong format.'
+                }
+
 class User_Profile(models.Model):
     # Fields...
     def __str__ (self):
         return self.name
 
-    name = models.CharField(max_length=100, verbose_name="Name")
+    name = models.CharField(max_length=100, verbose_name="Name", error_messages=error_name)
     login = models.CharField(max_length=25, verbose_name="Login")
     password = models.CharField(max_length=20, verbose_name="Password")
     phone = models.CharField(max_length=20, verbose_name="Phone number",

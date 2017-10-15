@@ -16,4 +16,7 @@ urlpatterns = [
     url(r'^mdeveloper$', views.mdeveloper_page, name='mdeveloper'),
     url(r'^ddeveloper$', views.ddeveloper_page, name='ddeveloper'),
 
+    url(r'^csupervisor$', views.csupervisor_page, name='csupervisor'),
+
+    url(r'^cproject$', views.cproject_page, name='cproject'),
 ]
