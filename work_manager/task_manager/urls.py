@@ -1,7 +1,8 @@
 
 from django.conf.urls import url
+from django.views.generic import CreateView
 from . import views
-
+from  task_manager.models import Project
 
 
 urlpatterns = [
@@ -19,4 +20,7 @@ urlpatterns = [
     url(r'^csupervisor$', views.csupervisor_page, name='csupervisor'),
 
     url(r'^cproject$', views.cproject_page, name='cproject'),
+
+    url (r'^cbv_project$', CreateView.as_view(fields=['title','description','client_name'], model=Project, template_name="task_manager/cbv_project.html",
+                                            success_url = 'connection'), name="cbv_project"),
 ]

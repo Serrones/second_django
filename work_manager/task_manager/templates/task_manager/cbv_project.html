@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title_html %}
+    CBV Project
+{% endblock %}
+{% block h1 %}
+Creating Project whit CBV
+{% endblock %}
+{% block article_content %}
+    <form method="post" action="{% url 'cbv_project' %}" >
+        {% csrf_token %}
+        <!-- This line inserts a CSRF token. -->
+        <table>
+            {{ form.as_table }}
+            <!-- This line displays lines of the form.-->
+        </table>
+        <p><input type="submit" value="Create" /></p>
+    </form>
+    </br>
+    </br>
+    {% url 'home' as home %}
+    <a href= "{{ home }}">Go Home</a>
+{% endblock %}

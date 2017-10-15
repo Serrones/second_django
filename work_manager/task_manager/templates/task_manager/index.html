@@ -8,32 +8,61 @@
 {% endblock %}
 {% block article_content %}
     <h2>{{ action }}</h2>
-    {% url 'projects' as the_projects %}
-    <a href= "{{ the_projects }}">Go to the Projects</a>
-    </br>
-    </br>
-    {% url 'cproject' as cproject %}
-    <a href= "{{ cproject }}">Create Project - Django Modelform</a>
-    </br>
-    </br>
-    {% url 'connection' as the_connection %}
-    <a href= "{{ the_connection }}">Go to the Deep Hole</a>
-    </br>
-    </br>
-    {% url 'automatic' as automatic %}
-    <a href= "{{ automatic }}">Create a automatic project</a>
-    </br>
-    </br>
-    {% url 'mdeveloper' as mdeveloper %}
-    <a href= "{{ mdeveloper }}">Create Developer - HTML form</a>
-    </br>
-    </br>
-    {% url 'ddeveloper' as ddeveloper %}
-    <a href= "{{ ddeveloper }}">Create Developer - Django form</a>
-    </br>
-    </br>
-    {% url 'csupervisor' as csupervisor %}
-    <a href= "{{ csupervisor }}">Create Supervisor - Django Modelform</a>
+    <p>
+    <table style="width:100%">
+        <tr>
+            <th><h3>Tests</h3></th>
+            <th><h3>HTML forms</h3></th>
+            <th><h3> Django Forms</h3></th>
+        </tr>
+        <tr>
+            <td>
+                {% url 'projects' as the_projects %}
+                <a href= "{{ the_projects }}">Go to the Projects</a>
+            </td>
+            <td>
+                {% url 'automatic' as automatic %}
+                <a href= "{{ automatic }}">Create a automatic project</a>
+            </td>
+            <td>
+                {% url 'cproject' as cproject %}
+                <a href= "{{ cproject }}">Create Project - Django Modelform</a>
+            </td>
+        <tr>
+            <td>
+                {% url 'connection' as the_connection %}
+                <a href= "{{ the_connection }}">Go to the Deep Hole</a>
+            </td>
+            <td>
+                {% url 'mdeveloper' as mdeveloper %}
+                <a href= "{{ mdeveloper }}">Create Developer - HTML form</a>
+            </td>
+            <td>
+                {% url 'ddeveloper' as ddeveloper %}
+                <a href= "{{ ddeveloper }}">Create Developer - Django form</a>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                {% url 'csupervisor' as csupervisor %}
+                <a href= "{{ csupervisor }}">Create Supervisor - Django Modelform</a>
+            </td>
+        </tr>
+    </p>
+    </table>
+    <p>
+        <table style="width:100%">
+            <tr>
+                <th><h3>CBV</h3></th>
+            </tr>
+            <tr>
+                <td>
+                    {% url 'cbv_project' as cproject %}
+                    <a href= "{{ cproject }}">Create a Project with CBV</a>
+                </td>
+            </tr>
     {% load static %}
     <script src="{% static "js/index.js" %}"></script>
 {% endblock %}

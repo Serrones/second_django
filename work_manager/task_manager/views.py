@@ -158,6 +158,7 @@ class Form_project_create(forms.Form):
     description = forms.CharField(widget= forms.Textarea(attrs={'rows':5, 'cols': 100,}))
     client_name = forms.CharField(label="Client", max_length=50)
 
+
 def cproject_page(request):
     if request.POST:
         form = Form_project_create(request.POST)

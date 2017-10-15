@@ -11,4 +11,6 @@
     <span> {{word | upper}} </span>
     </br>
     </br>
+    {% url 'home' as home %}
+    <a href= "{{ home }}">Go Home</a>
     {% endblock %}
