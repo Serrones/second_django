@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title_html %}
+    CBV Project
+{% endblock %}
+{% block h1 %}
+Creating Project whit CBV
+{% endblock %}
+{% block article_content %}
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Client name</th>
+        </tr>
+        {% for project in object_list %}
+            <tr>
+                <td>{{ project.title }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.client_name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </br>
+    </br>
+    {% url 'home' as home %}
+    <a href= "{{ home }}">Go Home</a>
+{% endblock %}

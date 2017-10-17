@@ -63,6 +63,18 @@
                     <a href= "{{ cproject }}">Create a Project with CBV</a>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    {% url 'cbv_task' as ctask %}
+                    <a href= "{{ ctask }}">Create a Task with CBV</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% url 'cbv_project_list' as clist %}
+                    <a href= "{{ clist }}">List All Projects</a>
+                </td>
+            </tr>
     {% load static %}
     <script src="{% static "js/index.js" %}"></script>
 {% endblock %}
