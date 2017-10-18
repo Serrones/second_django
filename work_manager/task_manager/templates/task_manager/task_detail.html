@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>
+                {% block title_html %}Task Detail{% endblock %}
+            </title>
+
+    </head>
+    <body>
+        <h1>
+            {% block h1 %}Task Detail{% endblock %}
+        </h1>
+        <article>
+            {% block article_content %}
+                <h4>
+                    {{ object.title }}
+                </h4>
+                <table>
+                    <tr>
+                        <td>Project : {{ object.project }}</td>
+                        <td>Developer : {{ object.app_user }}</td>
+                    </tr>
+                    <tr>
+                        <td>Importance : {{ object.importance }}</td>
+                        <td>Time elapsed : {{ object.time_elapsed }}</td>
+                    </tr>
+                </table>
+                <p>
+                    {{ object.description }}
+                </p>
+            {% endblock %}
+            </br>
+        </article>
+    </br>
+    </br>
+    {% url 'home' as home %}
+    <a href= "{{ home }}">Go Home</a>
+    </body>
+</html>

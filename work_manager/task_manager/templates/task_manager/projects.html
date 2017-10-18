@@ -28,4 +28,8 @@
     {% else %}
         <span>No project.</span>
     {% endif %}
+    </br>
+    </br>
+    {% url 'home' as home %}
+    <a href= "{{ home }}">Go Home</a>
 {% endblock %}

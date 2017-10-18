@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title_html %}
+    CBV Project ListView
+{% endblock %}
+{% block h1 %}
+Creating Project whit CBV ListView
+{% endblock %}
+{% block article_content %}
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Client name</th>
+        </tr>
+        {% for project in object_list %}
+            <tr>
+                <td>{{ project.title }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.client_name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</br>
+</br>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span>
+                {% if page_obj.has_previous %}
+                    <a href="{% url "projectlist_cbv" %}?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span style="margin-left:15px;margin-right:15px;">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages}}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{% url "projectlist_cbv" %}?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    </br>
+    </br>
+    {% url 'home' as home %}
+    <a href= "{{ home }}">Go Home</a>
+{% endblock %}

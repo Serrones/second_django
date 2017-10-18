@@ -4,6 +4,8 @@ from .models import Project, Task, Dev_Work_Task, Developer, Supervisor, User_Pr
 from django.utils import timezone
 from django import forms
 from django.core.urlresolvers import reverse
+from django.views.generic.list import ListView
+from django.views.generic import DetailView
 
 # Create your views here.
 
@@ -174,3 +176,26 @@ def cproject_page(request):
     else:
         form = Form_project_create()
         return render(request, 'task_manager/create_project.html', {'form' : form})
+
+
+class ListProject_CBV(ListView):
+    model = Project
+    template_name = 'task_manager/projectlist_cbv.html'
+    paginate_by = 3
+    def get_queryset(self):
+        queryset=Project.objects.all().order_by("title")
+        return queryset
+
+class Developer_detail(DetailView):
+    model=Developer
+    template_name = 'task_manager/developer_detail.html'
+    def get_context_data(self, **kwargs):
+        # This overrides the get_context_data() method.
+        context = super(Developer_detail, self).get_context_data(**kwargs)
+        # This allows calling the method of the super class. Without this line we would not have the basic context.
+        tasks_dev = Task.objects.filter(developer = self.object)
+        """ This allows us to retrieve the list of developer tasks. We use
+        self.object, which is a Developer type object already defined by theDetailView class."""
+        context['tasks_dev'] = tasks_dev
+        # In this line, we add the task list to the context.
+        return context

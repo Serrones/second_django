@@ -62,17 +62,32 @@
                     {% url 'cbv_project' as cproject %}
                     <a href= "{{ cproject }}">Create a Project with CBV</a>
                 </td>
+                <td>
+                    {% url 'projectlist_cbv' as projectlist %}
+                    <a href= "{{ projectlist }}">Project Details</a>
+                </td>
+                <td>
+                    {% url 'developer_detail' as ddetail %}
+                    <a href= "{{ ddetail }}">Developer Details</a>
+                </td>
             </tr>
             <tr>
                 <td>
                     {% url 'cbv_task' as ctask %}
                     <a href= "{{ ctask }}">Create a Task with CBV</a>
                 </td>
+                <td>
+                    {% url 'developer_list' as devlist %}
+                    <a href= "{{ devlist }}">Developer List</a>
+                </td>
             </tr>
             <tr>
                 <td>
                     {% url 'cbv_project_list' as clist %}
                     <a href= "{{ clist }}">List All Projects</a>
+                </td>
+                <td>
+                    <a href="{% url "task_detail" "1" %}">Detail first view</a>
                 </td>
             </tr>
     {% load static %}

@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>
+                {% block title_html %}
+                Developer list
+                {% endblock %}
+            </title>
+
+    </head>
+    <body>
+        <h1>
+            {% block h1 %}Developer List{% endblock %}
+        </h1>
+        <article>
+            {% block article_content %}
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>Login</td>
+                    <td>Supervisor</td>
+                </tr>
+                    {% for dev in object_list %}
+                        <tr>
+                            <td><a href="">{{ dev.name }}</a></td>
+                            <td>{{ dev.login }}</td>
+                            <td>{{ dev.gerente }}</td>
+                        </tr>
+                    {% endfor %}
+            </table>
+            {% endblock %}
+            </br>
+        </article>
+    </br>
+    </br>
+    {% url 'home' as home %}
+    <a href= "{{ home }}">Go Home</a>
+    </body>
+</html>
