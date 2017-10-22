@@ -1,8 +1,9 @@
 
 from django.conf.urls import url
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from . import views
 from  task_manager.models import Project, Task, Developer
+
 
 
 urlpatterns = [
@@ -21,7 +22,7 @@ urlpatterns = [
 
     url(r'^cproject$', views.cproject_page, name='cproject'),
 
-    url (r'^cbv_project$', CreateView.as_view(fields=['title','description','client_name'],
+    url (r'^cbv_project$', CreateView.as_view(fields=['title','description','client_name','developers'],
                                             model=Project, template_name="task_manager/cbv_project.html",
                                             success_url = 'connection'), name="cbv_project"),
 
@@ -43,4 +44,13 @@ urlpatterns = [
     url (r'^developer_detail_(?P<pk>\d+)$', views.Developer_detail.as_view(),
                                             name="developer_detail"),
 
+    url (r'^update_task_(?P<pk>\d+)$', UpdateView.as_view(fields=['title','description','project','importance'],model=Task, template_name="task_manager/update_task.html",
+                                    success_url="connection"), name="update_task"),
+
+    url (r'^update_task_time_(?P<pk>\d+)$', views.Task_update_time.as_view(), name = "update_task_time"),
+
+    url(r'task_delete_(?P<pk>\d+)$', views.Task_delete.as_view(), name="task_delete"),
+
+    url (r'^update_task_(?P<pk>\d+)$', views.UpdateViewCustom.as_view(fields=['title','description','project','importance'],
+                                    model=Task, url_name="update_task", success_url="connection"),name="update_task"),
 ]

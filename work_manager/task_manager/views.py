@@ -5,7 +5,8 @@ from django.utils import timezone
 from django import forms
 from django.core.urlresolvers import reverse
 from django.views.generic.list import ListView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView, DeleteView
+from django.forms import ModelForm
 
 # Create your views here.
 
@@ -198,4 +199,40 @@ class Developer_detail(DetailView):
         self.object, which is a Developer type object already defined by theDetailView class."""
         context['tasks_dev'] = tasks_dev
         # In this line, we add the task list to the context.
+        return context
+
+class Form_task_time(ModelForm):
+    class Meta:
+        model = Task
+        fields = ['time_elapsed']
+
+class Task_update_time(UpdateView):
+    model = Task
+    template_name = 'task_manager/update_task_time.html'
+    form_class = Form_task_time
+    success_url = 'connection'
+
+    def get_success_url(self):
+        return reverse(self.success_url)
+
+class Task_delete(DeleteView):
+    model = Task
+    template_name = 'task_manager/confirm_delete_task.html'
+    success_url = 'connection'
+    def get_success_url(self):
+        return reverse(self.success_url)
+
+
+class UpdateViewCustom(UpdateView):
+    template_name = 'task_manager/UpdateViewCustom.html'
+    url_name=""
+
+    def get_success_url(self):
+        return reverse(self.success_url)
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateViewCustom, self).get_context_data(**kwargs)
+        model_name = self.model._meta.verbose_name.title()
+        context['model_name'] = model_name
+        context['url_name'] = self.url_name
         return context

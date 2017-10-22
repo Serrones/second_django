@@ -43,7 +43,8 @@
             </td>
         </tr>
         <tr>
-            <td></td>
+            <td>
+            </td>
             <td></td>
             <td>
                 {% url 'csupervisor' as csupervisor %}
@@ -80,6 +81,10 @@
                     {% url 'developer_list' as devlist %}
                     <a href= "{{ devlist }}">Developer List</a>
                 </td>
+                <td>
+                    {% url 'update_task' as update_task %}
+                    <a href= "{% url "update_task" "1" %}">Update Task</a>
+                </td>
             </tr>
             <tr>
                 <td>
@@ -87,7 +92,22 @@
                     <a href= "{{ clist }}">List All Projects</a>
                 </td>
                 <td>
-                    <a href="{% url "task_detail" "1" %}">Detail first view</a>
+                    {% url 'task_detail' as task_detail %}
+                    <a href="{% url "task_detail" "1" %}">Task Details</a>
+                </td>
+                <td>
+                    {% url 'update_task_time' as update_task_time %}
+                    <a href= "{% url "update_task_time" "1" %}">Update Task Time</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {%url 'task_delete' as task_delete %}
+                    <a href= "{%url "task_delete" "1" %}"> Delete Task</a>
+                </td>
+                <td>
+                    {%url 'update_task' as update_task %}
+                    <a href= "{%url "update_task" "3" %}"> Update Task</a>
                 </td>
             </tr>
     {% load static %}

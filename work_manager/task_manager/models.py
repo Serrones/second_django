@@ -57,6 +57,10 @@ class Task(models.Model):
     def __str__ (self):
         return self.title
 
+    class Meta:
+        verbose_name = "task"
+        verbose_name_plural = "tasks"	
+
     title = models.CharField(max_length=50, verbose_name="Title")
     description = models.CharField(max_length=1000, verbose_name="Description")
     time_elapsed = models.IntegerField(verbose_name="Elapsed time" ,
@@ -67,6 +71,9 @@ class Task(models.Model):
     developers = models.ManyToManyField(Developer ,through="Dev_Work_Task")
 
 class Dev_Work_Task(models.Model):
+    class Meta:
+        auto_created = True
+
     developer = models.ForeignKey(Developer)
     task = models.ForeignKey(Task)
     time_elapsed_dev = models.IntegerField(verbose_name="Time elapsed",
